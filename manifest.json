@@ -1,0 +1,241 @@
+{
+  "type": "plugin",
+  "id": "io.edgeever.callouts",
+  "name": "Callouts",
+  "version": "1.0.0",
+  "apiVersion": "2",
+  "settingsUi": "host",
+  "author": "EdgeEver Community",
+  "description": "Obsidian-style Markdown callouts ([!note], [!tip], [!warning], foldable +/- blocks, nested callouts, visual composer, and workspace callout explorer).",
+  "locales": {
+    "en-US": {
+      "name": "Callouts",
+      "description": "Obsidian-style Markdown callouts ([!note], [!tip], [!warning], foldable +/- blocks, nested callouts, visual composer, and workspace callout explorer)."
+    },
+    "zh-CN": {
+      "name": "Callouts 提示块",
+      "description": "支持 Obsidian 语法的 Markdown Callout 提示块（[!note]、[!tip]、[!warning]、可折叠 +/-、嵌套提示块、可视化编辑器与全局 Callout 浏览面板）。"
+    },
+    "vi": {
+      "name": "Callouts",
+      "description": "Hỗ trợ Callout Markdown chuẩn Obsidian ([!note], [!tip], [!warning], thu gọn +/-, callout lồng nhau, trình tạo trực quan và trình duyệt callout)."
+    }
+  },
+  "entry": "./main.js",
+  "platforms": ["web", "desktop"],
+  "permissions": [
+    "notes:read",
+    "notes:write",
+    "editor:read",
+    "editor:write",
+    "storage",
+    "ui:commands",
+    "ui:navigation",
+    "ui:notices",
+    "ui:panels",
+    "ui:embeds"
+  ],
+  "settings": {
+    "fields": [
+      {
+        "key": "default-type",
+        "type": "select",
+        "label": "Default callout type",
+        "description": "Callout type selected by default when wrapping text or opening the Callout Composer.",
+        "default": "note",
+        "options": [
+          { "value": "note", "label": "Note ([!note])" },
+          { "value": "abstract", "label": "Abstract ([!abstract] / summary / tldr)" },
+          { "value": "info", "label": "Info ([!info])" },
+          { "value": "todo", "label": "Todo ([!todo])" },
+          { "value": "tip", "label": "Tip ([!tip] / hint / important)" },
+          { "value": "success", "label": "Success ([!success] / check / done)" },
+          { "value": "question", "label": "Question ([!question] / help / faq)" },
+          { "value": "warning", "label": "Warning ([!warning] / caution / attention)" },
+          { "value": "failure", "label": "Failure ([!failure] / fail / missing)" },
+          { "value": "danger", "label": "Danger ([!danger] / error)" },
+          { "value": "bug", "label": "Bug ([!bug])" },
+          { "value": "example", "label": "Example ([!example])" },
+          { "value": "quote", "label": "Quote ([!quote] / cite)" }
+        ],
+        "list": {
+          "title": "Supported Callout Types & Aliases",
+          "actionLabel": "View all types",
+          "items": [
+            { "title": "[!note]", "description": "General notes and default fallback for unrecognized types." },
+            { "title": "[!abstract]", "description": "Aliases: summary, tldr" },
+            { "title": "[!info]", "description": "Informational notes and context blocks." },
+            { "title": "[!todo]", "description": "Actionable task lists and checklists." },
+            { "title": "[!tip]", "description": "Aliases: hint, important" },
+            { "title": "[!success]", "description": "Aliases: check, done" },
+            { "title": "[!question]", "description": "Aliases: help, faq" },
+            { "title": "[!warning]", "description": "Aliases: caution, attention" },
+            { "title": "[!failure]", "description": "Aliases: fail, missing" },
+            { "title": "[!danger]", "description": "Aliases: error" },
+            { "title": "[!bug]", "description": "Bug reports, defects, and diagnostics." },
+            { "title": "[!example]", "description": "Worked examples and sample blocks." },
+            { "title": "[!quote]", "description": "Aliases: cite" }
+          ]
+        },
+        "locales": {
+          "zh-CN": {
+            "label": "默认 Callout 类型",
+            "description": "包装选区或打开 Callout 编辑器时默认选中的类型。",
+            "options": {
+              "note": "笔记 ([!note])",
+              "abstract": "摘要 ([!abstract] / summary / tldr)",
+              "info": "信息 ([!info])",
+              "todo": "待办 ([!todo])",
+              "tip": "提示 ([!tip] / hint / important)",
+              "success": "成功 ([!success] / check / done)",
+              "question": "问题 ([!question] / help / faq)",
+              "warning": "警告 ([!warning] / caution / attention)",
+              "failure": "失败 ([!failure] / fail / missing)",
+              "danger": "危险 ([!danger] / error)",
+              "bug": "缺陷 ([!bug])",
+              "example": "示例 ([!example])",
+              "quote": "引用 ([!quote] / cite)"
+            }
+          },
+          "vi": {
+            "label": "Loại callout mặc định",
+            "description": "Loại callout được chọn sẵn khi bọc vùng chọn hoặc mở trình tạo Callout.",
+            "options": {
+              "note": "Ghi chú ([!note])",
+              "abstract": "Tóm tắt ([!abstract] / summary / tldr)",
+              "info": "Thông tin ([!info])",
+              "todo": "Việc cần làm ([!todo])",
+              "tip": "Mẹo ([!tip] / hint / important)",
+              "success": "Thành công ([!success] / check / done)",
+              "question": "Câu hỏi ([!question] / help / faq)",
+              "warning": "Cảnh báo ([!warning] / caution / attention)",
+              "failure": "Thất bại ([!failure] / fail / missing)",
+              "danger": "Nguy hiểm ([!danger] / error)",
+              "bug": "Lỗi ([!bug])",
+              "example": "Ví dụ ([!example])",
+              "quote": "Trích dẫn ([!quote] / cite)"
+            }
+          }
+        }
+      },
+      {
+        "key": "default-fold",
+        "type": "select",
+        "label": "Default fold behavior",
+        "description": "Controls whether newly inserted callouts are static, expanded (+), or collapsed (-).",
+        "default": "none",
+        "options": [
+          { "value": "none", "label": "Static (not foldable)" },
+          { "value": "expanded", "label": "Foldable — Expanded (+)" },
+          { "value": "collapsed", "label": "Foldable — Collapsed (-)" }
+        ],
+        "locales": {
+          "zh-CN": {
+            "label": "默认折叠行为",
+            "description": "控制新插入的 Callout 是静态展示、默认展开 (+) 还是默认折叠 (-)。",
+            "options": {
+              "none": "静态（不可折叠）",
+              "expanded": "可折叠 — 默认展开 (+)",
+              "collapsed": "可折叠 — 默认折叠 (-)"
+            }
+          },
+          "vi": {
+            "label": "Trạng thái thu gọn mặc định",
+            "description": "Quy định callout mới chèn là tĩnh, mở sẵn (+) hay thu gọn sẵn (-).",
+            "options": {
+              "none": "Tĩnh (không thu gọn)",
+              "expanded": "Có thể thu gọn — Mở sẵn (+)",
+              "collapsed": "Có thể thu gọn — Thu gọn sẵn (-)"
+            }
+          }
+        }
+      },
+      {
+        "key": "visual-style",
+        "type": "select",
+        "label": "Callout visual style",
+        "description": "Choose how callout blocks are styled inside the editor and previews.",
+        "default": "obsidian",
+        "options": [
+          { "value": "obsidian", "label": "Obsidian Tinted Card" },
+          { "value": "minimal", "label": "Minimal Left Accent" },
+          { "value": "bordered", "label": "Crisp Outline Banner" }
+        ],
+        "locales": {
+          "zh-CN": {
+            "label": "提示块外观风格",
+            "description": "选择 Callout 在编辑器与预览中的视觉样式。",
+            "options": {
+              "obsidian": "Obsidian 柔和卡片",
+              "minimal": "极简左侧色条",
+              "bordered": "清晰描边横幅"
+            }
+          },
+          "vi": {
+            "label": "Kiểu hiển thị callout",
+            "description": "Chọn giao diện hiển thị khối callout trong trình soạn thảo và bản xem trước.",
+            "options": {
+              "obsidian": "Thẻ phủ màu Obsidian",
+              "minimal": "Viền trái tối giản",
+              "bordered": "Khung viền sắc nét"
+            }
+          }
+        }
+      },
+      {
+        "key": "live-preview-header",
+        "type": "boolean",
+        "label": "Live Preview clean headers",
+        "description": "Hide raw [!type] syntax on the header line when your cursor is outside the callout title.",
+        "default": true,
+        "locales": {
+          "zh-CN": {
+            "label": "实时预览隐藏 [!type] 语法",
+            "description": "当光标不在提示块标题行时，自动隐藏原始 [!type] 标记并显示美观标题。"
+          },
+          "vi": {
+            "label": "Ẩn cú pháp [!type] ở chế độ xem trước",
+            "description": "Ẩn ký hiệu [!type] thô trên dòng tiêu đề khi con trỏ nằm ngoài tiêu đề callout."
+          }
+        }
+      },
+      {
+        "key": "remember-fold-state",
+        "type": "boolean",
+        "label": "Remember fold state locally",
+        "description": "Persist interactive expand/collapse toggles for foldable callouts on this device.",
+        "default": true,
+        "locales": {
+          "zh-CN": {
+            "label": "本地记住折叠状态",
+            "description": "在当前设备的工作区中记住可折叠 Callout 的展开与收起状态。"
+          },
+          "vi": {
+            "label": "Ghi nhớ trạng thái đóng/mở cục bộ",
+            "description": "Lưu trạng thái đóng/mở khi bấm vào các callout có thể thu gọn trên thiết bị này."
+          }
+        }
+      },
+      {
+        "key": "custom-types",
+        "type": "text",
+        "label": "Custom callout types",
+        "description": "Define custom types as type=#RRGGBB[,icon] separated by semicolons or newlines. Icons: pencil, clipboard-list, info, circle-check, flame, check, circle-help, triangle-alert, x, zap, bug, list, quote, star, lightbulb, bookmark, sparkles, shield, terminal, book-open.",
+        "default": "",
+        "placeholder": "idea=#eab308,lightbulb; important-note=#0ea5e9,star",
+        "locales": {
+          "zh-CN": {
+            "label": "自定义 Callout 类型",
+            "description": "按 type=#RRGGBB[,icon] 格式定义，多项用分号或换行分隔。可选图标：pencil、clipboard-list、info、circle-check、flame、check、circle-help、triangle-alert、x、zap、bug、list、quote、star、lightbulb、bookmark、sparkles、shield、terminal、book-open。",
+            "placeholder": "idea=#eab308,lightbulb; important-note=#0ea5e9,star"
+          },
+          "vi": {
+            "label": "Loại callout tùy chỉnh",
+            "description": "Khai báo theo dạng type=#RRGGBB[,icon], phân tách bằng dấu chấm phẩy hoặc xuống dòng. Biểu tượng: pencil, clipboard-list, info, circle-check, flame, check, circle-help, triangle-alert, x, zap, bug, list, quote, star, lightbulb, bookmark, sparkles, shield, terminal, book-open.",
+            "placeholder": "idea=#eab308,lightbulb; important-note=#0ea5e9,star"
+          }
+        }
+      }
+    ]
+  }
+}

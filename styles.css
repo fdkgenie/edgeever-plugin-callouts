@@ -1,0 +1,580 @@
+/* EdgeEver Callouts Plugin — Obsidian-Compatible Callout Styles */
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] {
+  --ee-callout-rgb: 68, 138, 255;
+  position: relative !important;
+  box-sizing: border-box !important;
+  margin: 0.9rem 0 !important;
+  padding: 0.78rem 1rem !important;
+  border: 1px solid rgba(var(--ee-callout-rgb), 0.22) !important;
+  border-left: 4px solid rgb(var(--ee-callout-rgb)) !important;
+  border-radius: 10px !important;
+  background-color: rgba(var(--ee-callout-rgb), 0.08) !important;
+  background-image: none !important;
+  background-size: auto !important;
+  color: var(--edgeever-theme-text, #1e293b) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+  box-shadow: none !important;
+}
+
+:root.dark
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] {
+  border-color: rgba(var(--ee-callout-rgb), 0.34) !important;
+  border-left-color: rgb(var(--ee-callout-rgb)) !important;
+  background-color: rgba(var(--ee-callout-rgb), 0.14) !important;
+  color: var(--edgeever-theme-text, #e2e8f0) !important;
+}
+
+/* Visual style variants */
+html[data-ee-callouts-style="minimal"]
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] {
+  border-top-width: 0 !important;
+  border-right-width: 0 !important;
+  border-bottom-width: 0 !important;
+  border-left: 3.5px solid rgb(var(--ee-callout-rgb)) !important;
+  border-radius: 0 8px 8px 0 !important;
+  background-color: rgba(var(--ee-callout-rgb), 0.05) !important;
+  padding: 0.65rem 0.95rem !important;
+}
+
+:root.dark[data-ee-callouts-style="minimal"]
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] {
+  background-color: rgba(var(--ee-callout-rgb), 0.1) !important;
+}
+
+html[data-ee-callouts-style="bordered"]
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] {
+  border: 1.5px solid rgba(var(--ee-callout-rgb), 0.45) !important;
+  border-left: 4px solid rgb(var(--ee-callout-rgb)) !important;
+  border-radius: 10px !important;
+  background-color: var(--edgeever-theme-surface, #ffffff) !important;
+}
+
+:root.dark[data-ee-callouts-style="bordered"]
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] {
+  border-color: rgba(var(--ee-callout-rgb), 0.55) !important;
+  background-color: var(--edgeever-theme-surface, #0f172a) !important;
+}
+
+/* Override decorative theme ornaments on blockquote ::before / ::after */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout]::before,
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout]:not([data-ee-callout-foldable="true"])::after {
+  content: none !important;
+  display: none !important;
+  mask: none !important;
+  -webkit-mask: none !important;
+  background: none !important;
+}
+
+/* Callout header paragraph */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] > p:first-child {
+  position: relative !important;
+  margin-top: 0 !important;
+  margin-bottom: 0.48rem !important;
+  padding-left: 1.52rem !important;
+  min-height: 1.4em;
+  color: rgb(var(--ee-callout-rgb)) !important;
+  font-weight: 650 !important;
+  line-height: 1.5 !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-foldable="true"] > p:first-child {
+  padding-right: 1.85rem !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-title-only="true"] > p:first-child,
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-collapsed="true"] > p:first-child,
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] > p:first-child:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Callout type icon via CSS mask on ::before (zero child DOM mutation inside ProseMirror) */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout] > p:first-child::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.18em !important;
+  width: 1.12em !important;
+  height: 1.12em !important;
+  background-color: rgb(var(--ee-callout-rgb)) !important;
+  -webkit-mask: var(--ee-callout-icon) center / contain no-repeat !important;
+  mask: var(--ee-callout-icon) center / contain no-repeat !important;
+  pointer-events: none;
+}
+
+/* Live Preview clean header: hides raw `[!type]` marker when cursor is outside the header */
+html:not([data-ee-callouts-live-preview="false"])
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-header-clean="true"]:not([data-ee-callout-editing="true"])
+  > p:first-child {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+}
+
+html:not([data-ee-callouts-live-preview="false"])
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-header-clean="true"]:not([data-ee-callout-editing="true"])
+  > p:first-child::before {
+  font-size: 1rem !important;
+  top: 0.22rem !important;
+}
+
+html:not([data-ee-callouts-live-preview="false"])
+  :is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-header-clean="true"]:not([data-ee-callout-editing="true"])
+  > p:first-child::after {
+  content: attr(data-ee-callout-title) !important;
+  display: inline-block !important;
+  font-size: 0.96rem !important;
+  line-height: 1.5 !important;
+  font-weight: 650 !important;
+  color: rgb(var(--ee-callout-rgb)) !important;
+  letter-spacing: -0.005em;
+}
+
+/* Compact single-paragraph callouts (when header and body share one <p> separated by \n or <br>) */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-single-para-body="true"] > p:first-child {
+  color: inherit !important;
+  font-weight: 400 !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-single-para-body="true"] > p:first-child::first-line {
+  color: rgb(var(--ee-callout-rgb)) !important;
+  font-weight: 650 !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-single-para-body="true"][data-ee-callout-collapsed="true"]:not([data-ee-callout-editing="true"])
+  > p:first-child {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-single-para-body="true"][data-ee-callout-collapsed="true"]:not([data-ee-callout-editing="true"])
+  > p:first-child::before {
+  font-size: 1rem !important;
+  top: 0.22rem !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-single-para-body="true"][data-ee-callout-collapsed="true"]:not([data-ee-callout-editing="true"])
+  > p:first-child::after {
+  content: attr(data-ee-callout-title) !important;
+  display: inline-block !important;
+  font-size: 0.96rem !important;
+  line-height: 1.5 !important;
+  font-weight: 650 !important;
+  color: rgb(var(--ee-callout-rgb)) !important;
+}
+
+/* Foldable callout chevron & collapsed body hiding */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-foldable="true"]::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 0.78rem !important;
+  top: 0.88rem !important;
+  width: 1rem !important;
+  height: 1rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: rgb(var(--ee-callout-rgb)) !important;
+  background-image: none !important;
+  opacity: 0.82 !important;
+  cursor: pointer !important;
+  transform: rotate(0deg) !important;
+  transition: transform 150ms ease, opacity 150ms ease !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'2.2'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'm6%209%206%206%206-6'%2F%3E%3C%2Fsvg%3E")
+    center / contain no-repeat !important;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2024%2024'%20fill%3D'none'%20stroke%3D'%23000'%20stroke-width%3D'2.2'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Cpath%20d%3D'm6%209%206%206%206-6'%2F%3E%3C%2Fsvg%3E")
+    center / contain no-repeat !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-foldable="true"][data-ee-callout-collapsed="true"]::after {
+  transform: rotate(-90deg) !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout][data-ee-callout-collapsed="true"]
+  > :not(:first-child) {
+  display: none !important;
+}
+
+/* Body spacing inside callout */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout]
+  > :nth-child(2) {
+  margin-top: 0 !important;
+}
+
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout]
+  > :last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Nested callouts */
+:is(.ProseMirror, .markdown-content, .edgeever-phone-stage, .edgeever-print-content, .edgeever-html-content, .ee-callouts-preview-host)
+  blockquote[data-ee-callout]
+  blockquote[data-ee-callout] {
+  margin: 0.65rem 0 0.2rem !important;
+}
+
+/* =====================================================================
+   Composer, Explorer & Embed UI Styles
+   ===================================================================== */
+
+.ee-callouts-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #0f172a;
+}
+
+:root.dark .ee-callouts-panel {
+  color: #e2e8f0;
+}
+
+.ee-callouts-section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+:root.dark .ee-callouts-section-label {
+  color: #94a3b8;
+}
+
+.ee-callouts-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+  gap: 8px;
+}
+
+.ee-callouts-type-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  border: 1px solid rgba(var(--ee-callout-rgb, 100, 116, 139), 0.25);
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.06);
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 140ms ease, background-color 140ms ease, box-shadow 140ms ease;
+}
+
+.ee-callouts-type-card:hover {
+  border-color: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.55);
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.12);
+}
+
+.ee-callouts-type-card[data-selected="true"] {
+  border-color: rgb(var(--ee-callout-rgb, 100, 116, 139));
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.14);
+  box-shadow: 0 0 0 2px rgba(var(--ee-callout-rgb, 100, 116, 139), 0.22);
+}
+
+.ee-callouts-type-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  border-radius: 6px;
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.14);
+  color: rgb(var(--ee-callout-rgb, 100, 116, 139));
+}
+
+.ee-callouts-type-meta {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ee-callouts-type-name {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ee-callouts-type-token {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10.5px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:root.dark .ee-callouts-type-token {
+  color: #94a3b8;
+}
+
+.ee-callouts-alias-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.ee-callouts-alias-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.ee-callouts-alias-chip[data-active="true"] {
+  border-color: rgb(var(--ee-callout-rgb, 22, 160, 110));
+  background: rgba(var(--ee-callout-rgb, 22, 160, 110), 0.14);
+  color: rgb(var(--ee-callout-rgb, 22, 160, 110));
+  font-weight: 600;
+}
+
+:root.dark .ee-callouts-alias-chip {
+  border-color: #334155;
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+.ee-callouts-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .ee-callouts-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.ee-callouts-input,
+.ee-callouts-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 7px 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  outline: none;
+}
+
+.ee-callouts-input:focus,
+.ee-callouts-textarea:focus {
+  border-color: #16a06e;
+  box-shadow: 0 0 0 2px rgba(22, 160, 110, 0.16);
+}
+
+:root.dark .ee-callouts-input,
+:root.dark .ee-callouts-textarea {
+  border-color: #334155;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.ee-callouts-textarea {
+  min-height: 88px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.ee-callouts-segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ee-callouts-seg-btn {
+  padding: 6px 10px;
+  border-radius: 7px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ee-callouts-seg-btn[data-active="true"] {
+  border-color: #16a06e;
+  background: rgba(22, 160, 110, 0.12);
+  color: #047857;
+  font-weight: 600;
+}
+
+:root.dark .ee-callouts-seg-btn {
+  border-color: #334155;
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+:root.dark .ee-callouts-seg-btn[data-active="true"] {
+  border-color: #34d399;
+  background: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+.ee-callouts-code-preview {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+:root.dark .ee-callouts-code-preview {
+  border-color: #334155;
+  background: #0f172a;
+  color: #cbd5e1;
+}
+
+/* Explorer cards */
+.ee-callouts-explorer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ee-callouts-explorer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(var(--ee-callout-rgb, 100, 116, 139), 0.24);
+  border-left: 4px solid rgb(var(--ee-callout-rgb, 100, 116, 139));
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.05);
+}
+
+:root.dark .ee-callouts-explorer-card {
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.12);
+}
+
+.ee-callouts-explorer-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ee-callouts-explorer-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: rgb(var(--ee-callout-rgb, 100, 116, 139));
+  font-weight: 650;
+  font-size: 13.5px;
+}
+
+.ee-callouts-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(var(--ee-callout-rgb, 100, 116, 139), 0.14);
+  color: rgb(var(--ee-callout-rgb, 100, 116, 139));
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ee-callouts-explorer-body {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #334155;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+:root.dark .ee-callouts-explorer-body {
+  color: #cbd5e1;
+}
+
+.ee-callouts-explorer-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #64748b;
+}
+
+:root.dark .ee-callouts-explorer-foot {
+  color: #94a3b8;
+}
+
+.ee-callouts-open-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ee-callouts-open-btn:hover {
+  border-color: #16a06e;
+  color: #047857;
+}
+
+:root.dark .ee-callouts-open-btn {
+  border-color: #334155;
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.ee-callouts-embed-root {
+  padding: 8px;
+}

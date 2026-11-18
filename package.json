@@ -1,0 +1,24 @@
+{
+  "name": "edgeever-plugin-callouts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Obsidian-compatible Markdown callouts plugin for EdgeEver.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fdkgenie/edgeever-plugin-callouts.git"
+  },
+  "scripts": {
+    "build": "bun scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test tests",
+    "verify:release": "bun scripts/verify-release.mjs",
+    "check": "bun run typecheck && bun run test && bun run build && bun run verify:release"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "linkedom": "^0.18.12",
+    "typescript": "^5.9.2"
+  }
+}

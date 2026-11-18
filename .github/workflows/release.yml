@@ -1,0 +1,31 @@
+name: Release plugin assets
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      - name: Verify tag and manifest versions
+        run: bun scripts/verify-release.mjs "${GITHUB_REF_NAME}"
+      - name: Publish GitHub Release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release upload "${GITHUB_REF_NAME}" manifest.json main.js styles.css --clobber
+          else
+            gh release create "${GITHUB_REF_NAME}" manifest.json main.js styles.css --verify-tag --generate-notes
+          fi
